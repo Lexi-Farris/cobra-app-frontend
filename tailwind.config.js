@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,css,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,css,jsx,tsx}", "./node_modules/tw-elements/dist/js/**/*.js"],
   theme: {
     colors: {
       "custom-blue": {
@@ -21,5 +21,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class",
 };

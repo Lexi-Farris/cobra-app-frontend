@@ -1,3 +1,6 @@
+import { Ripple, initTE } from "tw-elements";
+initTE({ Ripple });
+
 export function Footer() {
   return (
     //  Footer
