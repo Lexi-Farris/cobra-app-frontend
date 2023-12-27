@@ -1,3 +1,7 @@
+import { Collapse, Ripple, initTE } from "tw-elements";
+
+initTE({ Collapse, Ripple });
+
 export function LandingPage() {
   return (
     <div
