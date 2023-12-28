@@ -1,11 +1,13 @@
 import { LandingPage } from "./LandingPage";
-import { StateDropDown } from "./StateDropDown";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
 
 export function Content() {
   return (
     <div>
       <LandingPage />
-      <StateDropDown />
+      <Signup />
+      <Login />
     </div>
   );
 }

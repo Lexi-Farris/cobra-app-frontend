@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { StateDropDown } from "./StateDropDown";
 
 export function Signup() {
   const [errors, setErrors] = useState([]);
@@ -46,6 +47,13 @@ export function Signup() {
         <div>
           City <input name="city" type="text" />
         </div>
+        <div>
+          <StateDropDown />
+        </div>
+        <div>
+          Zipcode: <input name="zipcode" type="integer" />
+        </div>
+        <button type="submit">Signup</button>
       </form>
     </div>
   );
