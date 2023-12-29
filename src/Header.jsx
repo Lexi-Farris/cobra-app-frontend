@@ -22,7 +22,7 @@ export function Header() {
     <header>
       <div className="mb-3">
         <TETabs>
-          <TETabsItem onClick={() => handleBasicClick("tab1")} active={basicActive === "tab1"}>
+          <TETabsItem onClick={() => handleBasicClick("home")} active={basicActive === "home"}>
             Home
           </TETabsItem>
           <TETabsItem onClick={() => handleBasicClick("tab2")} active={basicActive === "tab2"}>
@@ -40,7 +40,9 @@ export function Header() {
         </TETabs>
 
         <TETabsContent>
-          <TETabsPane show={basicActive === "tab1"}>Tab 1 content</TETabsPane>
+          <TETabsPane show={basicActive === "home"}>
+            <LandingPage />
+          </TETabsPane>
           <TETabsPane show={basicActive === "tab2"}>
             <Login />
           </TETabsPane>
