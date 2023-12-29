@@ -3,12 +3,12 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./node_modules/tw-elements-react/dist/js/**/*.js"],
   theme: {
     colors: {
-      "custom-blue": {
-        100: "#8ecae6",
-        200: "#219EBC",
-        300: "#126782",
-        400: "#023047",
-        500: "#023047",
+      "green-fam": {
+        100: "#ECF39E",
+        200: "#90A955",
+        300: "#4F772D",
+        400: "#31572C",
+        500: "#132A13",
       },
       "light-white": {
         100: "#f1faee",

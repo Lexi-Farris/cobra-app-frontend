@@ -1,6 +1,8 @@
 import { Login } from "./Login";
 import React, { useState } from "react";
 import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react";
+import { LandingPage } from "./LandingPage";
+import { Signup } from "./Signup";
 
 // Define the functional component
 export function Header() {
@@ -27,7 +29,10 @@ export function Header() {
             Login
           </TETabsItem>
           <TETabsItem onClick={() => handleBasicClick("tab3")} active={basicActive === "tab3"}>
-            Messages
+            Studio's Near Me
+          </TETabsItem>
+          <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
+            Sign Up
           </TETabsItem>
           <TETabsItem onClick={() => handleBasicClick("tab4")} active={basicActive === "tab4"} disabled>
             Contact
@@ -40,8 +45,12 @@ export function Header() {
             <Login />
           </TETabsPane>
 
-          <TETabsPane show={basicActive === "tab3"}>Tab 3 content</TETabsPane>
-          <TETabsPane show={basicActive === "tab4"}>Tab 4 content</TETabsPane>
+          <TETabsPane show={basicActive === "tab3"}>
+            <LandingPage />
+          </TETabsPane>
+          <TETabsPane show={basicActive === "Signup"}>
+            <Signup />
+          </TETabsPane>
         </TETabsContent>
       </div>
     </header>

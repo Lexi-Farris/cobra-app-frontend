@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { StateDropDown } from "./StateDropDown";
+import { TEInput } from "tw-elements-react";
 
 export function Signup() {
   const [errors, setErrors] = useState([]);
@@ -33,25 +34,13 @@ export function Signup() {
       </ul>
       <form onSubmit={handleSubmit}>
         <div>
-          Name: <input name="name" type="text" />
-        </div>
-        <div>
-          Email: <input name="email" type="email" />
-        </div>
-        <div>
-          Password: <input name="password" type="password" />
-        </div>
-        <div>
-          Retype Password: <input name="password_confirmation" type="password" />
-        </div>
-        <div>
-          City <input name="city" type="text" />
-        </div>
-        <div>
-          <StateDropDown />
-        </div>
-        <div>
-          Zipcode: <input name="zipcode" type="integer" />
+          <TEInput name="name" type="text" label="Name"></TEInput>
+          <TEInput name="email" type="email" label="Email"></TEInput>
+          <TEInput name="password" type="password" label="Password"></TEInput>
+          <TEInput name="password_confirmation" type="password" label="Retype Password"></TEInput>
+          <TEInput name="city" type="text" label="City"></TEInput>
+          <StateDropDown name="state" />
+          <TEInput name="zipcode" type="integer" label="Zipcode"></TEInput>
         </div>
         <button type="submit">Signup</button>
       </form>
