@@ -1,12 +1,57 @@
-import { Collapse, Ripple, initTE } from "tw-elements";
-import { Link } from "react-router-dom";
+import { Login } from "./Login";
+import React, { useState } from "react";
+import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react";
 
-initTE({ Collapse, Ripple });
-
+// Define the functional component
 export function Header() {
+  // Initialize state for active tab
+  const [basicActive, setBasicActive] = useState("tab1");
+
+  // Handle tab click event
+  const handleBasicClick = (value) => {
+    if (value === basicActive) {
+      return;
+    }
+    setBasicActive(value);
+  };
+
+  // Render the component
   return (
     <header>
-      <Link to="/login"> Login </Link>
+      <div className="mb-3">
+        <TETabs>
+          <TETabsItem onClick={() => handleBasicClick("tab1")} active={basicActive === "tab1"}>
+            Home
+          </TETabsItem>
+          <TETabsItem onClick={() => handleBasicClick("tab2")} active={basicActive === "tab2"}>
+            Login
+          </TETabsItem>
+          <TETabsItem onClick={() => handleBasicClick("tab3")} active={basicActive === "tab3"}>
+            Messages
+          </TETabsItem>
+          <TETabsItem onClick={() => handleBasicClick("tab4")} active={basicActive === "tab4"} disabled>
+            Contact
+          </TETabsItem>
+        </TETabs>
+
+        <TETabsContent>
+          <TETabsPane show={basicActive === "tab1"}>Tab 1 content</TETabsPane>
+          <TETabsPane show={basicActive === "tab2"}>
+            <Login />
+          </TETabsPane>
+
+          <TETabsPane show={basicActive === "tab3"}>Tab 3 content</TETabsPane>
+          <TETabsPane show={basicActive === "tab4"}>Tab 4 content</TETabsPane>
+        </TETabsContent>
+      </div>
     </header>
   );
 }
+
+// export function Header() {
+//   return (
+//     <header>
+//       <Link to="/login"> Login </Link>
+//     </header>
+//   );
+// }

@@ -6,9 +6,7 @@ import { Route, Routes } from "react-router-dom";
 export function Content() {
   return (
     <div>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Routes>{/* <Route path="/login" element={<Login />} /> */}</Routes>
       {/* <LandingPage />
       <Signup /> */}
     </div>
