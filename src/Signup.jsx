@@ -39,8 +39,9 @@ export function Signup() {
           <TEInput name="password" type="password" label="Password"></TEInput>
           <TEInput name="password_confirmation" type="password" label="Retype Password"></TEInput>
           <TEInput name="city" type="text" label="City"></TEInput>
-          <StateDropDown name="state" />
-          <TEInput name="zipcode" type="integer" label="Zipcode"></TEInput>
+          <TEInput name="name" type="name" label="Name"></TEInput>
+          <TEInput name="name" type="name" label="Name"></TEInput>
+          <StateDropDown />
         </div>
         <button type="submit">Signup</button>
       </form>
