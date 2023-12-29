@@ -1,5 +1,5 @@
-import { Ripple, initTE } from "tw-elements";
-initTE({ Ripple });
+import { Ripple } from "tw-elements";
+import { useEffect } from "react";
 
 export function Footer() {
   return (
