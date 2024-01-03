@@ -19,28 +19,6 @@ export function Header() {
     setBasicActive(value);
   };
 
-  let authLinks;
-  if (localStorage.jwt === undefined) {
-    authLinks = (
-      <>
-        <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
-          Sign Up
-        </TETabsItem>
-        <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
-          Login
-        </TETabsItem>
-      </>
-    );
-  } else {
-    authLinks = (
-      <>
-        <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
-          LogOut
-        </TETabsItem>
-      </>
-    );
-  }
-
   // Render the component
   return (
     <header>
@@ -52,7 +30,22 @@ export function Header() {
           <TETabsItem onClick={() => handleBasicClick("studio near me")} active={basicActive === "studio near me"}>
             Studio's Near Me
           </TETabsItem>
-          {authLinks}
+          {localStorage.jwt === undefined ? (
+            <>
+              <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
+                Sign Up
+              </TETabsItem>
+              <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
+                Login
+              </TETabsItem>
+            </>
+          ) : (
+            <>
+              <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
+                LogOut
+              </TETabsItem>
+            </>
+          )}
         </TETabs>
 
         <TETabsContent>
@@ -76,11 +69,3 @@ export function Header() {
     </header>
   );
 }
-
-// export function Header() {
-//   return (
-//     <header>
-//       <Link to="/login"> Login </Link>
-//     </header>
-//   );
-// }
