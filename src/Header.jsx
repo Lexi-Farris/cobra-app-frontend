@@ -5,11 +5,9 @@ import { LandingPage } from "./LandingPage";
 import { Signup } from "./Signup";
 import { LogoutLink } from "./LogoutLink";
 import { StudioMap } from "./StudioMap";
-import { Link } from "react-router-dom";
 
 // Define the functional component
 export function Header() {
-  let authLinks;
   // Initialize state for active tab
   const [basicActive, setBasicActive] = useState("");
 
@@ -20,6 +18,28 @@ export function Header() {
     }
     setBasicActive(value);
   };
+
+  let authLinks;
+  if (localStorage.jwt === undefined) {
+    authLinks = (
+      <>
+        <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
+          Sign Up
+        </TETabsItem>
+        <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
+          Login
+        </TETabsItem>
+      </>
+    );
+  } else {
+    authLinks = (
+      <>
+        <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
+          LogOut
+        </TETabsItem>
+      </>
+    );
+  }
 
   // Render the component
   return (
@@ -32,27 +52,18 @@ export function Header() {
           <TETabsItem onClick={() => handleBasicClick("studio near me")} active={basicActive === "studio near me"}>
             Studio's Near Me
           </TETabsItem>
-
-          <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
-            Sign Up
-          </TETabsItem>
-          <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
-            Login
-          </TETabsItem>
-          <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
-            LogOut
-          </TETabsItem>
+          {authLinks}
         </TETabs>
 
         <TETabsContent>
           <TETabsPane show={basicActive === "home"}>
             <LandingPage />
           </TETabsPane>
-          <TETabsPane show={basicActive === "login"}>
-            <Login />
-          </TETabsPane>
           <TETabsPane show={basicActive === "studio near me"}>
             <StudioMap />
+          </TETabsPane>
+          <TETabsPane show={basicActive === "login"}>
+            <Login />
           </TETabsPane>
           <TETabsPane show={basicActive === "Signup"}>
             <Signup />
