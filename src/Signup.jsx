@@ -25,7 +25,7 @@ export function Signup() {
   };
 
   return (
-    <div id="signup">
+    <div className="bg-light-white-200">
       <h1>Signup</h1>
       <ul>
         {errors.map((error) => (
@@ -39,8 +39,6 @@ export function Signup() {
           <TEInput name="password" type="password" label="Password"></TEInput>
           <TEInput name="password_confirmation" type="password" label="Retype Password"></TEInput>
           <TEInput name="city" type="text" label="City"></TEInput>
-          <TEInput name="name" type="name" label="Name"></TEInput>
-          <TEInput name="name" type="name" label="Name"></TEInput>
           <StateDropDown />
         </div>
         <button type="submit">Signup</button>

@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react";
 import { LandingPage } from "./LandingPage";
 import { Signup } from "./Signup";
+import { LogoutLink } from "./LogoutLink";
 
 // Define the functional component
 export function Header() {
   // Initialize state for active tab
-  const [basicActive, setBasicActive] = useState("tab1");
+  const [basicActive, setBasicActive] = useState("home");
 
   // Handle tab click event
   const handleBasicClick = (value) => {
@@ -25,17 +26,17 @@ export function Header() {
           <TETabsItem onClick={() => handleBasicClick("home")} active={basicActive === "home"}>
             Home
           </TETabsItem>
-          <TETabsItem onClick={() => handleBasicClick("tab2")} active={basicActive === "tab2"}>
-            Login
-          </TETabsItem>
-          <TETabsItem onClick={() => handleBasicClick("tab3")} active={basicActive === "tab3"}>
+          <TETabsItem onClick={() => handleBasicClick("studio near me")} active={basicActive === "studio near me"}>
             Studio's Near Me
           </TETabsItem>
           <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
             Sign Up
           </TETabsItem>
-          <TETabsItem onClick={() => handleBasicClick("tab4")} active={basicActive === "tab4"} disabled>
-            Contact
+          <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
+            Login
+          </TETabsItem>
+          <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
+            LogOut
           </TETabsItem>
         </TETabs>
 
@@ -43,15 +44,17 @@ export function Header() {
           <TETabsPane show={basicActive === "home"}>
             <LandingPage />
           </TETabsPane>
-          <TETabsPane show={basicActive === "tab2"}>
+          <TETabsPane show={basicActive === "login"}>
             <Login />
           </TETabsPane>
-
-          <TETabsPane show={basicActive === "tab3"}>
+          <TETabsPane show={basicActive === "studio near me"}>
             <LandingPage />
           </TETabsPane>
           <TETabsPane show={basicActive === "Signup"}>
             <Signup />
+          </TETabsPane>
+          <TETabsPane show={basicActive === "Log out"}>
+            <LogoutLink />
           </TETabsPane>
         </TETabsContent>
       </div>
