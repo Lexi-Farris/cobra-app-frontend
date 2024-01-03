@@ -4,11 +4,12 @@ import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react
 import { LandingPage } from "./LandingPage";
 import { Signup } from "./Signup";
 import { LogoutLink } from "./LogoutLink";
+import { StudioMap } from "./StudioMap";
 
 // Define the functional component
 export function Header() {
   // Initialize state for active tab
-  const [basicActive, setBasicActive] = useState("home");
+  const [basicActive, setBasicActive] = useState("");
 
   // Handle tab click event
   const handleBasicClick = (value) => {
@@ -29,6 +30,7 @@ export function Header() {
           <TETabsItem onClick={() => handleBasicClick("studio near me")} active={basicActive === "studio near me"}>
             Studio's Near Me
           </TETabsItem>
+
           <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
             Sign Up
           </TETabsItem>
@@ -48,7 +50,7 @@ export function Header() {
             <Login />
           </TETabsPane>
           <TETabsPane show={basicActive === "studio near me"}>
-            <LandingPage />
+            <StudioMap />
           </TETabsPane>
           <TETabsPane show={basicActive === "Signup"}>
             <Signup />
