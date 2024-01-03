@@ -7,7 +7,7 @@ export function LogoutLink() {
     delete axios.defaults.headers.common["Authorization"];
     console.log("token deleted");
     localStorage.removeItem("jwt");
-    window.location.href = "/home";
+    // window.location.href = "/";
   };
 
   return (
