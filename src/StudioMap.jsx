@@ -1,8 +1,9 @@
 import React from "react";
 import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
+import MAPTILER_API_KEY from "../config";
 
-const maptilerProvider = maptiler("MY_API_KEY", "streets");
+const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
 export function StudioMap() {
   return (
