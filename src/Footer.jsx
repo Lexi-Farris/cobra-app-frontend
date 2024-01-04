@@ -6,8 +6,8 @@ export function Footer() {
   return (
     //  Footer
     <footer className="flex flex-col items-center text-center text-white bg-green-fam-300 ">
-      <div className="container p-6">
-        <p className="flex items-center justify-center">
+      <div className="container p-6 ">
+        <p className="flex items-center justify-center m-0 p-0">
           <span className="mr-4">Register for free</span>
           <button
             type="button"
@@ -21,9 +21,9 @@ export function Footer() {
       </div>
 
       {/* <!--Copyright section--> */}
-      <div className="w-full p-4 text-center bg-green-fam-200 text-light-white-100">
+      <div className="w-full p-4 text-center bg-green-fam-200 text-light-white-100 ">
         © 2024
-        <a href="https://google.com/"> Cobra Pose App</a>
+        <a href="/"> Cobra Pose App</a>
       </div>
     </footer>
   );

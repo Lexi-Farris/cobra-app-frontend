@@ -1,5 +1,5 @@
 import { Collapse, Ripple, initTE } from "tw-elements";
-
+import { Link } from "react-router-dom";
 initTE({ Collapse, Ripple });
 export function LandingPage() {
   return (
@@ -9,12 +9,12 @@ export function LandingPage() {
         <p className="text-lg mt-4">Connecting You to Yoga Studios Wherever You Roam.</p>
       </div>
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4 z-10 ">
-        <a
-          href="https://google.com"
+        <Link
+          to="/studios"
           class="inline-block bg-green-fam-400 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-light-white-200 rounded shadow bg-opacity-50 hover:bg-opacity-100"
         >
           Find your zen now
-        </a>
+        </Link>
       </div>
 
       <div

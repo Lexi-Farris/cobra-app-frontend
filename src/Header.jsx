@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <header>
-      <div className="mb-3">
+      <div>
         <TETabs>
           <Link to="/">
             <TETabsItem onClick={() => handleBasicClick("home")} active={basicActive === "home"}>
