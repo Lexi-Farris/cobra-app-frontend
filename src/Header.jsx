@@ -1,18 +1,15 @@
-import { Login } from "./Login";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react";
 import { LandingPage } from "./LandingPage";
 import { Signup } from "./Signup";
+import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
 import { StudioMap } from "./StudioMap";
-import { BrowserRouter as router, Route, Link } from "react-router-dom";
 
-// Define the functional component
 export function Header() {
-  // Initialize state for active tab
   const [basicActive, setBasicActive] = useState("");
 
-  // Handle tab click event
   const handleBasicClick = (value) => {
     if (value === basicActive) {
       return;
@@ -20,31 +17,40 @@ export function Header() {
     setBasicActive(value);
   };
 
-  // Render the component
   return (
     <header>
       <div className="mb-3">
         <TETabs>
-          <TETabsItem onClick={() => handleBasicClick("home")} active={basicActive === "home"}>
-            Home
-          </TETabsItem>
-          <TETabsItem onClick={() => handleBasicClick("studio near me")} active={basicActive === "studio near me"}>
-            Studio's Near Me
-          </TETabsItem>
+          <Link to="/">
+            <TETabsItem onClick={() => handleBasicClick("home")} active={basicActive === "home"}>
+              Home
+            </TETabsItem>
+          </Link>
+          <Link to="/studios">
+            <TETabsItem onClick={() => handleBasicClick("studio near me")} active={basicActive === "studio near me"}>
+              Studio's Near Me
+            </TETabsItem>
+          </Link>
           {localStorage.jwt === undefined ? (
             <>
-              <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
-                Sign Up
-              </TETabsItem>
-              <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
-                Login
-              </TETabsItem>
+              <Link to="/signup">
+                <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
+                  Sign Up
+                </TETabsItem>
+              </Link>
+              <Link to="/login">
+                <TETabsItem onClick={() => handleBasicClick("login")} active={basicActive === "login"}>
+                  Login
+                </TETabsItem>
+              </Link>
             </>
           ) : (
             <>
-              <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
-                LogOut
-              </TETabsItem>
+              <Link to="/logout">
+                <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
+                  LogOut
+                </TETabsItem>
+              </Link>
             </>
           )}
         </TETabs>
