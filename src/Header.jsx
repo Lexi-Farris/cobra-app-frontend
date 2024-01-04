@@ -5,6 +5,7 @@ import { LandingPage } from "./LandingPage";
 import { Signup } from "./Signup";
 import { LogoutLink } from "./LogoutLink";
 import { StudioMap } from "./StudioMap";
+import { BrowserRouter as router, Route, Link } from "react-router-dom";
 
 // Define the functional component
 export function Header() {
