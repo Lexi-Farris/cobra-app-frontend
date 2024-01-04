@@ -8,16 +8,13 @@ import axios from "axios";
 const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
 export function StudioMap() {
-  const [studioInfo, setStudioInfo] = useState([]);
   const [center, setCenter] = useState([]);
 
   // CALLS GOOGLE API RESPONSE FROM BACK END
   const handleIndexYoga = () => {
-    console.log("handleIndexYoga");
     axios.get("http://localhost:3000/yoga.json").then((response) => {
-      console.log([response.data[0].geometry.location.lat, response.data[0].geometry.location.lng]);
-      setStudioInfo(response.data);
       setCenter([response.data[0].geometry.location.lat, response.data[0].geometry.location.lng]);
+      console.log(response.data);
     });
   };
 

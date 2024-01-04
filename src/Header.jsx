@@ -4,11 +4,20 @@ import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react
 import { LandingPage } from "./LandingPage";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
-import { LogoutLink } from "./LogoutLink";
 import { StudioMap } from "./StudioMap";
+import axios from "axios";
 
 export function Header() {
   const [basicActive, setBasicActive] = useState("");
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log("clicked event");
+    delete axios.defaults.headers.common["Authorization"];
+    console.log("token deleted");
+    localStorage.removeItem("jwt");
+    window.location.href = "/";
+  };
 
   const handleBasicClick = (value) => {
     if (value === basicActive) {
@@ -47,7 +56,7 @@ export function Header() {
           ) : (
             <>
               <Link to="/logout">
-                <TETabsItem onClick={() => handleBasicClick("Log out")} active={basicActive === "Log out"}>
+                <TETabsItem onClick={handleClick} active={basicActive === "Log out"}>
                   LogOut
                 </TETabsItem>
               </Link>
@@ -57,7 +66,7 @@ export function Header() {
 
         <TETabsContent>
           <TETabsPane show={basicActive === "home"}>
-            <LandingPage />
+            <LandingPage onSelectButton={() => handleBasicClick("studio near me")} />
           </TETabsPane>
           <TETabsPane show={basicActive === "studio near me"}>
             <StudioMap />
@@ -67,9 +76,6 @@ export function Header() {
           </TETabsPane>
           <TETabsPane show={basicActive === "Signup"}>
             <Signup />
-          </TETabsPane>
-          <TETabsPane show={basicActive === "Log out"}>
-            <LogoutLink />
           </TETabsPane>
         </TETabsContent>
       </div>

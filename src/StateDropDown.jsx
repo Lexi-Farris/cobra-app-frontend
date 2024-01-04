@@ -3,9 +3,9 @@ initTE({ Select });
 
 export function StateDropDown() {
   return (
-    <div>
+    <div className="z-3 ">
       <label data-te-select-label-ref> Select a state: </label>
-      <select data-te-select-init>
+      <select name="state" data-te-select-init>
         <option value="Alabama">Alabama</option>
         <option value="Alaska">Alaska</option>
         <option value="Arizona">Arizona</option>

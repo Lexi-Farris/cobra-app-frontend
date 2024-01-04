@@ -1,7 +1,10 @@
 import { Collapse, Ripple, initTE } from "tw-elements";
 import { Link } from "react-router-dom";
 initTE({ Collapse, Ripple });
-export function LandingPage() {
+
+export function LandingPage(props) {
+  console.log(props);
+
   return (
     <div className="relative">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-black">
@@ -9,12 +12,12 @@ export function LandingPage() {
         <p className="text-lg mt-4">Connecting You to Yoga Studios Wherever You Roam.</p>
       </div>
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4 z-10 ">
-        <Link
-          to="/studios"
-          class="inline-block bg-green-fam-400 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-light-white-200 rounded shadow bg-opacity-50 hover:bg-opacity-100"
+        <div
+          onClick={props.onSelectButton}
+          className="inline-block bg-green-fam-400 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-light-white-200 rounded shadow bg-opacity-50 hover:bg-opacity-100"
         >
           Find your zen now
-        </Link>
+        </div>
       </div>
 
       <div
