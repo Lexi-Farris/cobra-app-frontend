@@ -1,36 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
-import MAPTILER_API_KEY from "../config";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { Modal } from "./Modal";
+import MAPTILER_API_KEY from "../config";
 
 const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
 export function StudioMap() {
+  const [popUpVisable, setpopUpVisible] = useState(false);
+  const [popUpContent, setPopUpContent] = useState(undefined);
   //Center coordinates based off user's location provided at login
   const [center, setCenter] = useState([]);
 
   //Renders yoga studios near user's given location
   const [yogaStudios, setYogaStudios] = useState([]);
 
-  // CALLS GOOGLE API RESPONSE FROM BACK END
-  const handleIndexYoga = () => {
-    axios.get("http://localhost:3000/yoga.json").then((response) => {
-      const studios = response.data.map((studio) => ({
-        lat: studio.geometry.location.lat,
-        lng: studio.geometry.location.lng,
-        name: studio.name,
-        address: studio.formatted_address,
-        id: studio.place_id, // re-format place ID into web url
-      }));
-
-      setYogaStudios(studios);
-      setCenter([studios[0].lat, studios[0].lng]);
-    });
-  };
   //CALLS FUNCTION
-  useEffect(handleIndexYoga, []);
+  useEffect(() => {
+    // CALLS GOOGLE API RESPONSE FROM BACK END
+    const handleIndexYoga = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/yoga.json");
+        const studios = response.data.map((studio) => ({
+          lat: studio.geometry.location.lat,
+          lng: studio.geometry.location.lng,
+          name: studio.name,
+          address: studio.formatted_address,
+          id: studio.place_id, // re-format place ID into web url
+        }));
+
+        setYogaStudios(studios);
+        setCenter([studios[0].lat, studios[0].lng]);
+      } catch (error) {
+        console.error("Error fetching yoga studios:", error);
+      }
+    };
+
+    handleIndexYoga();
+  }, []);
 
   return (
     // DEFAULT MAP MARKER LOCATION POSITION
@@ -45,12 +53,18 @@ export function StudioMap() {
               key={index}
               anchor={[studio.lat, studio.lng]}
               color="orange"
+              name={studio.name}
               payload={index}
-              onClick={({ event, anchor, payload }) => {
-                console.log(`Clicked marker for ${yogaStudios[payload].name}`);
+              onClick={() => {
+                setpopUpVisible(true);
+                setPopUpContent(studio.name);
+                console.log(studio);
               }}
             />
           ))}
+          <Modal show={popUpVisable} onClose={() => setpopUpVisible(false)}>
+            <div> {popUpContent} </div>
+          </Modal>
           <ZoomControl />
         </Map>
       ) : (
