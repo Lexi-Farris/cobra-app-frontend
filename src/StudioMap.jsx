@@ -23,13 +23,14 @@ export function StudioMap() {
       try {
         const response = await axios.get("http://localhost:3000/yoga.json");
         const studios = response.data.map((studio) => {
+          console.log(response);
           return {
             lat: studio.geometry.location.lat,
             lng: studio.geometry.location.lng,
             name: studio.name,
             address: studio.formatted_address,
-            website: studio.url,
-            id: studio.place_id, // re-format place ID into web url
+            id: studio.place_id,
+            website: `https://www.google.com/maps/place/?q=place_id:${studio.place_id}`,
           };
         });
         setYogaStudios(studios);
@@ -59,7 +60,7 @@ export function StudioMap() {
               payload={index}
               onClick={() => {
                 setpopUpVisible(true);
-                setPopUpContent({ name: studio.name, address: studio.address, url: studio.url });
+                setPopUpContent({ name: studio.name, address: studio.address, website: studio.website });
               }}
             />
           ))}
@@ -67,7 +68,11 @@ export function StudioMap() {
             <div>
               <p> {popUpContent.name}</p>
               <p> {popUpContent.address} </p>
-              <p> {popUpContent.url} </p>
+              <p>
+                <a href={popUpContent.website} target="_blank" rel="noopener noreferrer">
+                  Website
+                </a>
+              </p>
             </div>
           </Modal>
           <ZoomControl />
