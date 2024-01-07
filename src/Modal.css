@@ -18,7 +18,9 @@
   left: 50%;
   transform: translate(-50%,-50%);
   padding: 1em;
+  font-size: medium;
   
+
 }
 
 .modal-main button.close {
