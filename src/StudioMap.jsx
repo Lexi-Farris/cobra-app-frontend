@@ -12,9 +12,21 @@ export function StudioMap() {
   const [popUpContent, setPopUpContent] = useState({});
   //Center coordinates based off user's location provided at login
   const [center, setCenter] = useState([]);
+  const [savedStudios, setSavedStudios] = useState([]);
 
   //Renders yoga studios near user's given location
   const [yogaStudios, setYogaStudios] = useState([]);
+
+  //Save studio
+  const handleSaveStudio = (studio) => {
+    setSavedStudios([...savedStudios, studio]);
+  };
+
+  // Removed saved studio
+  const handleRemoveStudio = (studioId) => {
+    const updateStudios = savedStudios.filter((studio) => studio.id !== studioId);
+    setSavedStudios(updateStudios);
+  };
 
   //CALLS FUNCTION
   useEffect(() => {
@@ -66,6 +78,11 @@ export function StudioMap() {
           ))}
           <Modal show={popUpVisable} onClose={() => setpopUpVisible(false)}>
             <div>
+              <button style={{ color: "orange" }} onClick={() => handleSaveStudio(studio)}>
+                {" "}
+                &#x2764; Save Studio{" "}
+              </button>
+              <br></br>
               <p style={{ fontWeight: "bold" }}> {popUpContent.name}</p>
               <p> {popUpContent.address} </p>
               <p style={{ color: "blue" }}>
