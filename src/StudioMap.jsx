@@ -66,7 +66,7 @@ export function StudioMap() {
           ))}
           <Modal show={popUpVisable} onClose={() => setpopUpVisible(false)}>
             <div>
-              <p> {popUpContent.name}</p>
+              <p className> {popUpContent.name}</p>
               <p> {popUpContent.address} </p>
               <p>
                 <a href={popUpContent.website} target="_blank" rel="noopener noreferrer">
