@@ -9,7 +9,7 @@ const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
 export function StudioMap() {
   const [popUpVisable, setpopUpVisible] = useState(false);
-  const [popUpContent, setPopUpContent] = useState(undefined);
+  const [popUpContent, setPopUpContent] = useState({});
   //Center coordinates based off user's location provided at login
   const [center, setCenter] = useState([]);
 
@@ -22,14 +22,16 @@ export function StudioMap() {
     const handleIndexYoga = async () => {
       try {
         const response = await axios.get("http://localhost:3000/yoga.json");
-        const studios = response.data.map((studio) => ({
-          lat: studio.geometry.location.lat,
-          lng: studio.geometry.location.lng,
-          name: studio.name,
-          address: studio.formatted_address,
-          id: studio.place_id, // re-format place ID into web url
-        }));
-
+        const studios = response.data.map((studio) => {
+          return {
+            lat: studio.geometry.location.lat,
+            lng: studio.geometry.location.lng,
+            name: studio.name,
+            address: studio.formatted_address,
+            website: studio.url,
+            id: studio.place_id, // re-format place ID into web url
+          };
+        });
         setYogaStudios(studios);
         setCenter([studios[0].lat, studios[0].lng]);
       } catch (error) {
@@ -57,13 +59,16 @@ export function StudioMap() {
               payload={index}
               onClick={() => {
                 setpopUpVisible(true);
-                setPopUpContent(studio.name);
-                console.log(studio);
+                setPopUpContent({ name: studio.name, address: studio.address, url: studio.url });
               }}
             />
           ))}
           <Modal show={popUpVisable} onClose={() => setpopUpVisible(false)}>
-            <div> {popUpContent} </div>
+            <div>
+              <p> {popUpContent.name}</p>
+              <p> {popUpContent.address} </p>
+              <p> {popUpContent.url} </p>
+            </div>
           </Modal>
           <ZoomControl />
         </Map>
