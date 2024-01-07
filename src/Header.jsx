@@ -9,6 +9,7 @@ import axios from "axios";
 
 export function Header() {
   const [basicActive, setBasicActive] = useState("");
+  const [savedStudios, setSavedStudios] = useState([]);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -40,7 +41,8 @@ export function Header() {
               Studio's Near Me
             </TETabsItem>
           </Link>
-          {localStorage.jwt === undefined ? (
+
+          {localStorage.getItem("jwt") === null ? (
             <>
               <Link to="/signup">
                 <TETabsItem onClick={() => handleBasicClick("Signup")} active={basicActive === "Signup"}>
@@ -60,6 +62,11 @@ export function Header() {
                   LogOut
                 </TETabsItem>
               </Link>
+              <Link to="/saved">
+                <TETabsItem onClick={() => handleBasicClick("saved")} active={basicActive === "saved"}>
+                  &#x2764; Favorites
+                </TETabsItem>
+              </Link>
             </>
           )}
         </TETabs>
@@ -76,6 +83,9 @@ export function Header() {
           </TETabsPane>
           <TETabsPane show={basicActive === "Signup"}>
             <Signup />
+          </TETabsPane>
+          <TETabsPane show={basicActive === "saved"}>
+            <savedStudios savedStudios={savedStudios} />
           </TETabsPane>
         </TETabsContent>
       </div>

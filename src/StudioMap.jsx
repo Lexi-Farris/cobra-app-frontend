@@ -18,14 +18,31 @@ export function StudioMap() {
   const [yogaStudios, setYogaStudios] = useState([]);
 
   //Save studio
-  const handleSaveStudio = (studio) => {
-    setSavedStudios([...savedStudios, studio]);
+  const handleSaveStudio = async (studio) => {
+    try {
+      await axios.post("http://localhost:3000/saved", {
+        studio: {
+          studio_id: studio.id,
+          name: studio.name,
+          address: studio.address,
+          website: studio.website,
+        },
+      });
+      setSavedStudios([...savedStudios, studio]);
+    } catch (error) {
+      console.error("Error saving studio:", error);
+    }
   };
 
   // Removed saved studio
-  const handleRemoveStudio = (studioId) => {
-    const updateStudios = savedStudios.filter((studio) => studio.id !== studioId);
-    setSavedStudios(updateStudios);
+  const handleRemoveStudio = async (studioId) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/v1/saved/${studioId}`);
+      const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
+      setSavedStudios(updatedStudios);
+    } catch (error) {
+      console.error("Error removing studio:", error);
+    }
   };
 
   //CALLS FUNCTION
