@@ -18,55 +18,59 @@ export function StudioMap() {
   const [yogaStudios, setYogaStudios] = useState([]);
 
   //Save studio
-  const handleSaveStudio = async (studio) => {
-    try {
-      await axios.post(`http://localhost:3000/saved/${user.id}`, {
+  const handleSaveStudio = (studio) => {
+    axios
+      .post(`http://localhost:3000/saved/${user.id}`, {
         studio: {
           studio_id: studio.id,
           name: studio.name,
           address: studio.address,
           website: studio.website,
         },
+      })
+      .then((response) => {
+        setSavedStudios([...savedStudios, studio]);
+      })
+      .catch((error) => {
+        console.error("Error saving studio:", error);
       });
-      setSavedStudios([...savedStudios, studio]);
-    } catch (error) {
-      console.error("Error saving studio:", error);
-    }
   };
 
   // Removed saved studio
-  const handleRemoveStudio = async (studioId) => {
-    try {
-      await axios.delete(`http://localhost:3000/api/v1/saved/${studioId}`);
-      const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
-      setSavedStudios(updatedStudios);
-    } catch (error) {
-      console.error("Error removing studio:", error);
-    }
+  const handleRemoveStudio = (studioId) => {
+    axios
+      .delete(`http://localhost:3000/api/v1/saved/${studioId}`)
+      .then(() => {
+        const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
+        setSavedStudios(updatedStudios);
+      })
+      .catch((error) => {
+        console.error("Error removing studio:", error);
+      });
   };
 
   //CALLS FUNCTION
   useEffect(() => {
     // CALLS GOOGLE API RESPONSE FROM BACK END
-    const handleIndexYoga = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/yoga.json");
-        const studios = response.data.map((studio) => {
+    const handleIndexYoga = () => {
+      axios
+        .get("http://localhost:3000/yoga.json")
+        .then((response) => {
           console.log(response);
-          return {
+          const studios = response.data.map((studio) => ({
             lat: studio.geometry.location.lat,
             lng: studio.geometry.location.lng,
             name: studio.name,
             address: studio.formatted_address,
             id: studio.place_id,
             website: `https://www.google.com/maps/place/?q=place_id:${studio.place_id}`,
-          };
+          }));
+          setYogaStudios(studios);
+          setCenter([studios[0].lat, studios[0].lng]);
+        })
+        .catch((error) => {
+          console.error("Error fetching yoga studios:", error);
         });
-        setYogaStudios(studios);
-        setCenter([studios[0].lat, studios[0].lng]);
-      } catch (error) {
-        console.error("Error fetching yoga studios:", error);
-      }
     };
 
     handleIndexYoga();
