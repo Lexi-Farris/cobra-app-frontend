@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TETabs, TETabsContent, TETabsItem, TETabsPane } from "tw-elements-react";
 import { LandingPage } from "./LandingPage";
@@ -6,6 +6,7 @@ import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { StudioMap } from "./StudioMap";
 import axios from "axios";
+import { SavedStudios } from "./SavedStudios";
 
 export function Header() {
   const [basicActive, setBasicActive] = useState("");
@@ -19,6 +20,19 @@ export function Header() {
     localStorage.removeItem("jwt");
     window.location.href = "/";
   };
+
+  const handleGetStudio = () => {
+    axios
+      .get("http://localhost:3000/saved")
+      .then((response) => {
+        setSavedStudios(response.data);
+      })
+      .catch((error) => {
+        console.error("Error saving studio:", error);
+      });
+  };
+
+  useEffect(handleGetStudio, []);
 
   const handleBasicClick = (value) => {
     if (value === basicActive) {
@@ -85,7 +99,7 @@ export function Header() {
             <Signup />
           </TETabsPane>
           <TETabsPane show={basicActive === "saved"}>
-            <savedStudios savedStudios={savedStudios} />
+            <SavedStudios savedStudios={savedStudios} />
           </TETabsPane>
         </TETabsContent>
       </div>

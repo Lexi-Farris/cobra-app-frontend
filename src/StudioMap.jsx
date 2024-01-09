@@ -8,7 +8,7 @@ import MAPTILER_API_KEY from "../config";
 const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
 export function StudioMap() {
-  const [popUpVisable, setpopUpVisible] = useState(false);
+  const [popUpVisible, setpopUpVisible] = useState(false);
   const [popUpContent, setPopUpContent] = useState({});
   //Center coordinates based off user's location provided at login
   const [center, setCenter] = useState([]);
@@ -20,7 +20,7 @@ export function StudioMap() {
   //Save studio
   const handleSaveStudio = async (studio) => {
     try {
-      await axios.post("http://localhost:3000/saved", {
+      await axios.post(`http://localhost:3000/saved/${user.id}`, {
         studio: {
           studio_id: studio.id,
           name: studio.name,
@@ -93,9 +93,9 @@ export function StudioMap() {
               }}
             />
           ))}
-          <Modal show={popUpVisable} onClose={() => setpopUpVisible(false)}>
+          <Modal show={popUpVisible} onClose={() => setpopUpVisible(false)}>
             <div>
-              <button style={{ color: "orange" }} onClick={() => handleSaveStudio(studio)}>
+              <button style={{ color: "orange" }} onClick={() => handleSaveStudio(popUpContent)}>
                 {" "}
                 &#x2764; Save Studio{" "}
               </button>
