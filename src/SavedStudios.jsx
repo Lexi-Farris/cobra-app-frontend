@@ -3,15 +3,16 @@ export function SavedStudios(props) {
   return (
     <div className="relative overflow-hidden bg-cover bg-no-repeat  opacity-40 ">
       <h2 style={{ fontWeight: "bold" }}>Saved Studios</h2>
-      <img
+      {/* <img
         src="https://images.squarespace-cdn.com/content/v1/5f3b180bebcf7a5e8e8685a9/1b927512-184d-4759-a730-0d2b0e696d1a/Victoria+Web-29.jpg"
         alt="Lakeside yoga studio"
         style={{ maxWidth: "100%", height: "auto" }}
-      />
+      /> */}
 
       {props.savedStudios.map((studio) => (
-        <div key={studio.id}>
+        <div z-10 key={studio.id}>
           <p>{studio.name}</p>
+          <p>{studio.address} </p>
           <button onClick={() => props.onRemoveSavedStudio(studio.id)}>Remove from Saved</button>
         </div>
       ))}

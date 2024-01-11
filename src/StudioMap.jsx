@@ -13,6 +13,7 @@ export function StudioMap() {
   //Center coordinates based off user's location provided at login
   const [center, setCenter] = useState([]);
   const [savedStudios, setSavedStudios] = useState([]);
+  const [user, setUser] = useState({});
 
   //Renders yoga studios near user's given location
   const [yogaStudios, setYogaStudios] = useState([]);
@@ -20,7 +21,7 @@ export function StudioMap() {
   //Save studio
   const handleSaveStudio = (studio) => {
     axios
-      .post(`http://localhost:3000/saved/${user.id}`, {
+      .post(`http://localhost:3000/saved.json`, {
         studio: {
           studio_id: studio.id,
           name: studio.name,
