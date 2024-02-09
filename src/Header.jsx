@@ -23,7 +23,7 @@ export function Header() {
 
   const handleGetStudio = () => {
     axios
-      .get("http://localhost:3000/saved")
+      .get("/saved")
       .then((response) => {
         setSavedStudios(response.data);
       })
