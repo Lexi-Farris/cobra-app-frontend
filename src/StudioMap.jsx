@@ -24,7 +24,7 @@ export function StudioMap() {
   //Save studio
   const handleSaveStudio = (studio) => {
     axios
-      .post(`saved.json`, {
+      .post(`/saved.json`, {
         studio: {
           studio_id: studio.id,
           name: studio.name,
