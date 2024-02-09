@@ -21,37 +21,38 @@ export function StudioMap() {
   //Renders yoga studios near user's given location
   const [yogaStudios, setYogaStudios] = useState([]);
 
-  //Save studio
-  const handleSaveStudio = (studio) => {
-    axios
-      .post(`/saved.json`, {
-        studio: {
-          studio_id: studio.id,
-          name: studio.name,
-          address: studio.address,
-          website: studio.website,
-        },
-      })
-      .then((response) => {
-        setSavedStudios([...savedStudios, studio]);
-      })
-      .catch((error) => {
-        console.error("Error saving studio:", error);
-      });
-  };
+  // //Save studio
+  // const handleSaveStudio = (studio) => {
+  //   axios
+  //     .post(`/saved.json`, {
+  //       studio: {
+  //         studio_id: studio.id,
+  //         name: studio.name,
+  //         address: studio.address,
+  //         website: studio.website,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       setSavedStudios([...savedStudios, studio]);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error saving studio:", error);
+  //     });
+  // };
 
-  // Removed saved studio
-  const handleRemoveStudio = (studioId) => {
-    axios
-      .delete(`/api/v1/saved/${studioId}`)
-      .then(() => {
-        const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
-        setSavedStudios(updatedStudios);
-      })
-      .catch((error) => {
-        console.error("Error removing studio:", error);
-      });
-  };
+  // // Removed saved studio
+  // const handleRemoveStudio = (studioId) => {
+  //   axios
+  //     .delete(`/api/v1/saved/${studioId}`)
+  //     .then(() => {
+  //       const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
+  //       setSavedStudios(updatedStudios);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error removing studio:", error);
+  //     });
+  // };
 
   //CALLS FUNCTION
   useEffect(() => {
