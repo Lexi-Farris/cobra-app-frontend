@@ -23,7 +23,7 @@ export function Header() {
 
   const handleGetStudio = () => {
     axios
-      .get("/saved")
+      .get("https://cobra-pose-app.onrender.com/saved")
       .then((response) => {
         setSavedStudios(response.data);
       })

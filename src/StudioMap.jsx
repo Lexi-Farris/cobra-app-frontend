@@ -21,7 +21,7 @@ export function StudioMap() {
   //Save studio
   const handleSaveStudio = (studio) => {
     axios
-      .post(`saved.json`, {
+      .post(`https://cobra-pose-app.onrender.com/saved.json`, {
         studio: {
           studio_id: studio.id,
           name: studio.name,
@@ -40,7 +40,7 @@ export function StudioMap() {
   // Removed saved studio
   const handleRemoveStudio = (studioId) => {
     axios
-      .delete(`/api/v1/saved/${studioId}`)
+      .delete(`https://cobra-pose-app.onrender.com//api/v1/saved/${studioId}`)
       .then(() => {
         const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
         setSavedStudios(updatedStudios);
@@ -55,7 +55,7 @@ export function StudioMap() {
     // CALLS GOOGLE API RESPONSE FROM BACK END
     const handleIndexYoga = () => {
       axios
-        .get("/yoga.json")
+        .get("https://cobra-pose-app.onrender.com//yoga.json")
         .then((response) => {
           console.log(response);
           const studios = response.data.map((studio) => ({
