@@ -2,6 +2,9 @@ import axios from "axios";
 import { React, useState } from "react";
 import { TEInput } from "tw-elements-react";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "cobra-pose-app.onrender.com";
+
 const jwt = localStorage.getItem("jwt");
 if (jwt) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;

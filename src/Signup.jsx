@@ -3,6 +3,9 @@ import { useState } from "react";
 import { StateDropDown } from "./StateDropDown";
 import { TEInput } from "tw-elements-react";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "cobra-pose-app.onrender.com";
+
 export function Signup() {
   const [errors, setErrors] = useState([]);
 

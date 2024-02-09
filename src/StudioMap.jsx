@@ -7,6 +7,9 @@ import MAPTILER_API_KEY from "../config";
 
 const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "cobra-pose-app.onrender.com";
+
 export function StudioMap() {
   const [popUpVisible, setpopUpVisible] = useState(false);
   const [popUpContent, setPopUpContent] = useState({});
@@ -21,7 +24,7 @@ export function StudioMap() {
   //Save studio
   const handleSaveStudio = (studio) => {
     axios
-      .post(`https://cobra-pose-app.onrender.com/saved.json`, {
+      .post(`saved.json`, {
         studio: {
           studio_id: studio.id,
           name: studio.name,
@@ -40,7 +43,7 @@ export function StudioMap() {
   // Removed saved studio
   const handleRemoveStudio = (studioId) => {
     axios
-      .delete(`https://cobra-pose-app.onrender.com//api/v1/saved/${studioId}`)
+      .delete(`/api/v1/saved/${studioId}`)
       .then(() => {
         const updatedStudios = savedStudios.filter((studio) => studio.id !== studioId);
         setSavedStudios(updatedStudios);
@@ -55,7 +58,7 @@ export function StudioMap() {
     // CALLS GOOGLE API RESPONSE FROM BACK END
     const handleIndexYoga = () => {
       axios
-        .get("https://cobra-pose-app.onrender.com//yoga.json")
+        .get("/yoga.json")
         .then((response) => {
           console.log(response);
           const studios = response.data.map((studio) => ({

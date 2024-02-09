@@ -8,6 +8,9 @@ import { StudioMap } from "./StudioMap";
 import axios from "axios";
 import { SavedStudios } from "./SavedStudios";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "cobra-pose-app.onrender.com";
+
 export function Header() {
   const [basicActive, setBasicActive] = useState("");
   const [savedStudios, setSavedStudios] = useState([]);
