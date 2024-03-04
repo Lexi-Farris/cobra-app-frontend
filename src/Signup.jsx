@@ -3,6 +3,9 @@ import { useState } from "react";
 import { StateDropDown } from "./StateDropDown";
 import { TEInput } from "tw-elements-react";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "cobra-pose-app.onrender.com";
+
 export function Signup() {
   const [errors, setErrors] = useState([]);
 
@@ -11,7 +14,7 @@ export function Signup() {
     setErrors([]);
     const params = new FormData(event.target);
     axios
-      .post("http://localhost:3000/users.json", params)
+      .post("users.json", params)
       .then((response) => {
         console.log(response.data);
         event.target.reset();

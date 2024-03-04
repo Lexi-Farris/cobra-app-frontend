@@ -2,6 +2,9 @@ import axios from "axios";
 import { React, useState } from "react";
 import { TEInput } from "tw-elements-react";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "cobra-pose-app.onrender.com";
+
 const jwt = localStorage.getItem("jwt");
 if (jwt) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
@@ -16,7 +19,7 @@ export function Login() {
 
     const params = new FormData(event.target);
     axios
-      .post("http://localhost:3000/sessions.json", params)
+      .post("/sessions.json", params)
       .then((response) => {
         console.log(response.data);
         axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.jwt;
