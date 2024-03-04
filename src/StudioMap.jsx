@@ -3,7 +3,7 @@ import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
 import axios from "axios";
 import { Modal } from "./Modal";
-import MAPTILER_API_KEY from "../config";
+import MAPTILER_API_KEY from "../config.js";
 
 const maptilerProvider = maptiler(MAPTILER_API_KEY, "dataviz");
 
